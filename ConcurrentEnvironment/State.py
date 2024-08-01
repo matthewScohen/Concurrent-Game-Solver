@@ -2,9 +2,9 @@ class State:
     def __init__(self, state_data: str) -> None:
         self.state_data = state_data
         # integers refer to a location in graph of the in/out states
-        # out_nodes[action1][action2] = list(State)
+        # out_neighbors[action1][action2] = list(State)
         self.out_neighbors = dict()
-        # out_nodes[action][action2] = list(State)
+        # in_neighbors[action][action2] = list(State)
         self.in_neighbors = dict()
 
         # Sub-assignment dictionary for the traditional solver: defining it as a dictionary of sets.
