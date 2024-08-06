@@ -26,7 +26,7 @@ def stay(player: int, state: 'State', target_set):
     #             stay_set.add(a1)
     if player == 1:
         for a1 in state.sub_assignment_p1:
-            if all(state.out_neighbors[a1][a2].issubset(target_set) for a2 in state.sub_assignment_p2):
+            if all(set(state.out_neighbors[a1][a2]).issubset(target_set) for a2 in state.sub_assignment_p2):
                 stay_action_set.add(a1)
 
     # elif player == 2:
@@ -51,12 +51,13 @@ def stay(player: int, state: 'State', target_set):
 def pre(player: int, target_set, graph: Graph):
     pre_set = set()
     if player == 1:
-        return {s for s in graph.states if any(
-            all(s.out_neighbors[a1][a2].issubset(target_set) for a2 in s.sub_assignment_p2) for a1 in
-            s.sub_assignment_p1)}
+        # TODO use s.out_neighbors[a1] instead of s.sub_assignment_p2 and use s.out_neighbors instead of s.sub_assignment_p1
+        return {s for state_data, s in graph.states.items() if any(
+            all(set(s.out_neighbors[a1][a2]).issubset(target_set) for a2 in s.out_neighbors[a1]) for a1 in
+            s.out_neighbors)}
     elif player == 2:
-        return {s for s in graph.states if any(
-            all(s.out_neighbors[a1][a2].issubset(target_set) for a2 in s.sub_assignment_p2) for a1 in
+        return {s for state_data, s in graph.states.items() if any(
+            all(set(s.out_neighbors[a1][a2]).issubset(target_set) for a2 in s.sub_assignment_p2) for a1 in
             s.sub_assignment_p1)}
 
 
@@ -82,7 +83,7 @@ def almost_sure_solver(graph: Graph, final_states):
         next_target_set = safe(1, graph, prev_target_set.difference(new_C_set))
 
         # Updating the sub-assignments for each state
-        for state in graph.states:
+        for state_data, state in graph.states.items():
             state.sub_assignment_p1 = stay(1, state, next_target_set)
 
         if next_target_set == prev_target_set:

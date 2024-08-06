@@ -13,5 +13,5 @@ class Graph:
         self.states[source].add_out_node(dest, action1, action2)
         self.states[dest].add_in_node(source, action1, action2)
         # setting sub assignements as well.
-        # self.states[source].sub_assignment(source, action1, action2)
+        self.states[source].add_sub_assignment(self.states[source], action1, action2)
 
