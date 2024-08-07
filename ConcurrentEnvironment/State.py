@@ -4,6 +4,7 @@ class State:
         # integers refer to a location in graph of the in/out states
         # out_neighbors[action1][action2] = list(State)
         self.out_neighbors = dict()
+        # TODO in_neighbors should be in the form in_neighbors[state] = (a1, a2)
         # in_neighbors[action][action2] = list(State)
         self.in_neighbors = dict()
 
