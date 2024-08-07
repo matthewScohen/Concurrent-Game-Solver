@@ -26,3 +26,7 @@ class Graph:
             self.sub_assignment_2[source] = set()
         self.sub_assignment_2[source].add(action2)
         # self.states[source].add_sub_assignment(self.states[source], action1, action2)
+
+    def print(self):
+        for s in self.states:
+            print(f"{s}: {self.states[s].out_neighbors}")

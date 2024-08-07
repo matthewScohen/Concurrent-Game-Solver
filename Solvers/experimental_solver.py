@@ -29,19 +29,17 @@ def experimental_solver(graph: Graph, final_states: set[str]) -> (set[State], di
     while index < len(winning_region):
         # iterate over all incoming states to new attractor states
         for action1, action2_dict in graph.states[winning_region[index].state_data].in_neighbors.items():
-            for action2, source in action2_dict.items():
-                if state_map[source][action1] != 0:
-                    state_map[source][action1] -= 1
-                    # if all edges for an action are eliminated then the state can be added to the winning region
-                    if state_map[source][action1] == 0:
-                        # a state can already be in the winning region if it has another action that makes it winning
-                        if source not in winning_region:
-                            winning_region.append(graph.states[source])
-                        # the action with all eliminated edges can be added to the strategy list at that state
-                        strategy[source].append(action1)
-                else:
-                    pass
-                    # raise Exception("Attempted to eliminate edge from state-action pair that is already marked "
-                    #                 "winning. Make sure final states have no out-going edges.")
+            for action2, sources in action2_dict.items():
+                for source in sources:
+                    if state_map[source][action1] != 0:
+                        state_map[source][action1] -= 1
+                        # if all edges for an action are eliminated then the state can be added to the winning region
+                        if state_map[source][action1] == 0:
+                            # TODO make winning_region a set for O(1) lookup
+                            if graph.states[source] not in winning_region:
+                                winning_region.append(graph.states[source])
+                                strategy[source].append(action1)
+                    else:
+                        pass
         index += 1
-    return winning_region, strategy
+    return set(winning_region), strategy

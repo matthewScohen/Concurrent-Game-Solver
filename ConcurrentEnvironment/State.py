@@ -5,7 +5,7 @@ class State:
         # out_neighbors[action1][action2] = list(State)
         self.out_neighbors = dict()
         # TODO in_neighbors should be in the form in_neighbors[state] = (a1, a2)
-        # in_neighbors[action][action2] = list(State)
+        # in_neighbors[action][action2] = set(State)
         self.in_neighbors = dict()
 
         # # a copy of out neighbors in the other direction of dictionary for use in the traditional algorithm.
@@ -19,8 +19,8 @@ class State:
         if action1 not in self.in_neighbors:
             self.in_neighbors[action1] = dict()
         if action2 not in self.in_neighbors[action1]:
-            self.in_neighbors[action1][action2] = dict()
-        self.in_neighbors[action1][action2] = state
+            self.in_neighbors[action1][action2] = set()
+        self.in_neighbors[action1][action2].add(state)
 
     def add_out_node(self, state: 'State', action1: str, action2: str):
         if action1 not in self.out_neighbors:
