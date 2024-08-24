@@ -1,6 +1,5 @@
-from ConcurrentEnvironment import State
-from ConcurrentEnvironment.Graph import Graph
-import copy
+from Python.ConcurrentEnvironment import State
+from Python.ConcurrentEnvironment.Graph import Graph
 
 
 def traditional_solver(graph: Graph, final_states: set[str]) -> (set[State], dict[State, str]):

@@ -1,6 +1,6 @@
 import itertools
 import random
-from ConcurrentEnvironment.Graph import Graph
+from Python.ConcurrentEnvironment.Graph import Graph
 
 
 def generate_random_graph_complete(num_nodes: int, num_final_states: int, action_set1: set[str], action_set2: set[str]) -> (Graph, set[str]):

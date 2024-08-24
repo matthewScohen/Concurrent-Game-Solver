@@ -1,6 +1,5 @@
-from ConcurrentEnvironment.Graph import Graph
-from Solvers.experimental_solver import experimental_solver
-from Solvers.traditional_solver import traditional_solver
+from Python.Solvers.experimental_solver import experimental_solver
+from Python.Solvers.traditional_solver import traditional_solver
 from GraphGeneration import generate_random_graph_complete
 
 if __name__ == "__main__":

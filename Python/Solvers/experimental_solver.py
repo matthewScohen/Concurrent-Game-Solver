@@ -1,6 +1,6 @@
 from collections import defaultdict
-from ConcurrentEnvironment.Graph import Graph
-from ConcurrentEnvironment.State import State
+from Python.ConcurrentEnvironment.Graph import Graph
+from Python.ConcurrentEnvironment.State import State
 
 
 def experimental_solver(graph: Graph, final_states: set[str]) -> (set[State], dict[State, str]):
